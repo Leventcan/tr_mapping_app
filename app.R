@@ -63,6 +63,10 @@ ui <- fluidPage(
             
             uiOutput("map_palette"),
             
+            selectInput("colour_order", label = h4("Renk Sırası"), 
+                        choices = list("Düz" = 1 , "Ters" = 2), 
+                        selected = "Düz"),
+            
             numericInput("legend_col", label = h4("Lejand Kolon Sayısı"), value = 1),
             
             checkboxInput("etiket", label = "Etiket Olsun", value = FALSE),
@@ -75,9 +79,19 @@ ui <- fluidPage(
             
             actionButton("map_button", "Haritayı Oluştur"),
             
-            tags$h4("İndirme"),
+            tags$br(),
+            tags$br(),
             
-            downloadButton('download', label = "İndir")
+            tags$h3(tags$b("İndirme")),
+            
+            fluidRow(
+               column(4,numericInput("num_width", label = h5("Genişlik"), value = 14)),
+               column(4, numericInput("num_height", label = h5("Yükseklik"), value = 7))
+                
+            ),
+            
+            
+            downloadButton('downloadPlot', label = "İndir")
             
         ),
         
@@ -94,7 +108,7 @@ ui <- fluidPage(
 # Define server logic to read selected file ----
 server <- function(input, output) {
     
-
+    
     df_data <- reactive({
         
         validate(
@@ -116,12 +130,12 @@ server <- function(input, output) {
         }
     )
     
-
+    
     map_data1 <- eventReactive(input$map_button, {
-            
+        
         map_data()
-            
-        })
+        
+    })
     
     output$map_palette <- renderUI({
         
@@ -130,10 +144,17 @@ server <- function(input, output) {
                     choices = chosen_pal)
     })
     
-    
-    output$map01 <- renderPlot({
-        p <- ggplot(map_data1()) + geom_sf(aes(fill = DATA)) + 
-            map_theme1() + scale_fill_brewer(palette = input$palette) +
+
+    plotInput <-  reactive( {
+        p = ggplot(map_data1()) + geom_sf(aes(fill = DATA),size = 0.4) + 
+            map_theme1() + 
+            scale_fill_brewer(palette = input$palette , 
+                                  direction = if(input$colour_order == 1){
+                                      1
+                                  } else{
+                                      -1
+                                  }
+                                      ) +
             guides(fill=guide_legend(ncol=input$legend_col))
         
         if (input$etiket == TRUE){
@@ -141,14 +162,31 @@ server <- function(input, output) {
         } else {
             p
         }
-            
-       
     })
     
-    output$deneme <- renderTable({
-        return(df_data())
+    
+    output$map01 <- renderPlot({
+        
+        plotInput()
         
     })
+    
+    
+    #Belki daha sonra kullanılabilir
+    # output$deneme <- renderTable({
+    #     return(df_data())
+    #     
+    # })
+    
+    output$downloadPlot <- downloadHandler(
+        filename = 'test.png',
+        content = function(file) {
+            device <- function(..., width, height) {
+                grDevices::png(..., width = width, height = height,
+                               res = 300, units = "in")
+            }
+            ggsave(file, plot = plotInput(), device = device, width = input$num_width, height = input$num_height)
+        })
     
 }
 # Run the app ----
