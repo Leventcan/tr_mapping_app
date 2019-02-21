@@ -5,6 +5,7 @@ library(ggplot2)
 library(dplyr)
 library(RColorBrewer)
 library(sf)
+library(shinyjqui)
 
 
 options(shiny.sanitize.errors=FALSE)
@@ -84,6 +85,10 @@ ui <- fluidPage(
         column(6, numericInput("label_size", label = h5("Etiket Boyut"), value = 2.3)),
         column(6, numericInput("legend_size", label = h5("Lejand Boyut"), value = 8))
       ),
+      
+      uiOutput("factor_order"),
+      
+      # orderInput(inputId = 'foo', label = 'A simple example', items = c('A', 'B', 'C')),
       
       tags$h4("Lejand Konumlandırma"),
       
@@ -175,8 +180,18 @@ server <- function(input, output) {
   })
   
   
+  output$factor_order <- renderUI({
+
+    orderInput(inputId = "foo", label = h4("Öğeleri Sıralayınız"), 
+               items = unique(df_data()$DATA))
+
+  })
+  
+  
+  
   plotInput <-  reactive( {
-    p = ggplot(map_data1()) + geom_sf(aes(fill = DATA),size = 0.4) + 
+    p = ggplot(map_data1()) + 
+      geom_sf(aes(fill = factor(DATA, levels = input$foo_order)),size = 0.4) + 
       map_theme1() + 
       scale_fill_brewer(palette = input$palette , 
                         direction = if(input$colour_order == 1){
@@ -187,8 +202,8 @@ server <- function(input, output) {
       ) +
       guides(fill=guide_legend(ncol=input$legend_col)) +
       theme(legend.text=element_text(size=input$legend_size),
-            legend.position= c(input$hor_position, input$ver_position) #sol değeri artırırsan sağa kayar, sağdakini azaltırsan aşağıya
-      )
+            legend.position= c(input$hor_position, input$ver_position)  #sol değeri artırırsan sağa kayar, sağdakini azaltırsan aşağıya
+      )  
     
     if (input$etiket == TRUE){
       p + geom_sf_text( aes(label = LABEL), size = input$label_size)
