@@ -6,6 +6,7 @@ library(dplyr)
 library(RColorBrewer)
 library(sf)
 library(shinyjqui)
+library(shinythemes)
 
 
 options(shiny.sanitize.errors=FALSE)
@@ -32,7 +33,7 @@ pal_info <-brewer.pal.info
 pal_info <- rownames_to_column(pal_info, "palette")
 
 # Define UI for data upload app ----
-ui <- fluidPage(
+ui <- fluidPage(theme = shinytheme("united"),
   
   # App title ----
   titlePanel("Tematik Harita Oluşturucu"),
@@ -125,7 +126,7 @@ ui <- fluidPage(
       tags$br(),
       
       tags$h6("Geliştirici Hk."),
-      tags$h6(tags$a(href = "https://github.com/Leventcan", "@Leventcan"))
+      tags$h6(tags$a(href = "https://github.com/Leventcan", "Leventcan Gültekin"))
       
       
     ),
