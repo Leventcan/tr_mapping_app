@@ -33,7 +33,7 @@ pal_info <-brewer.pal.info
 pal_info <- rownames_to_column(pal_info, "palette")
 
 # Define UI for data upload app ----
-ui <- fluidPage(theme = shinytheme("united"),
+ui <- fluidPage(theme = shinytheme("flatly"),
   
   # App title ----
   titlePanel("Tematik Harita Oluşturucu"),
