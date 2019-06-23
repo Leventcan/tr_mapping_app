@@ -34,111 +34,111 @@ pal_info <- rownames_to_column(pal_info, "palette")
 
 # Define UI for data upload app ----
 ui <- fluidPage(theme = shinytheme("flatly"),
-  
-  # App title ----
-  titlePanel("Tematik Harita Oluşturucu"),
-  
-  # Sidebar layout with input and output definitions ----
-  sidebarLayout(
-    
-    # Sidebar panel for inputs ----
-    sidebarPanel(
-      
-      # Input: Select a file ----
-      fileInput("file1", "Excel Dosyası Yükleyin",
-                multiple = TRUE,
-                accept = c("text/csv",
-                           "text/comma-separated-values,text/plain",
-                           ".csv",
-                           ".xls",
-                           ".xlsx")),
-      
-      tags$h5("Yükleyeceğiniz excel dosyalarında ", 
-              tags$a(href = "https://github.com/Leventcan/tr_mapping_app/raw/master/sample_excel_tr2.xlsx", "Düzey-2"),
-              " ve ",
-              tags$a(href = "https://github.com/Leventcan/tr_mapping_app/raw/master/sample_excel_tr3.xlsx", "Düzey-3"),
-              " verileri için linkte belirtilen excel dosyalarının kullanılmasında fayda bulunmaktadır."),
-      
-      tags$h5("Kullanım için ", 
-              tags$a(href = "https://github.com/Leventcan/tr_mapping_app/blob/master/README.md","rehberi"),
-      "inceleyebilirsiniz"),
-      
-      selectInput("olcek", label = h4("Ölçek Seçiniz"), 
-                  choices = list("Düzey-2", "Düzey-3"), 
-                  selected = "Düzey-3"),
-      
-      selectInput("veri_tip", label = h4("Verinizin Tipini Seçiniz"),
-                  choices = list("Ardışık" = "seq", "Kategorik" = "qual",
-                                 "Ayrıksı" = "div"),
-                  selected = "seq"),
-      
-      uiOutput("map_palette"),
-      
-      selectInput("colour_order", label = h4("Renk Sırası"), 
-                  choices = list("Düz" = 1 , "Ters" = 2), 
-                  selected = "Düz"),
-      
-      numericInput("legend_col", label = h4("Lejand Kolon Sayısı"), value = 1),
-      
-      checkboxInput("etiket", label = "Etiket Olsun", value = FALSE),
-      
-      fluidRow(
-        column(6, numericInput("label_size", label = h5("Etiket Boyut"), value = 2.3)),
-        column(6, numericInput("legend_size", label = h5("Lejand Boyut"), value = 8))
-      ),
-      
-      uiOutput("factor_order"),
-      
-      # orderInput(inputId = 'foo', label = 'A simple example', items = c('A', 'B', 'C')),
-      
-      tags$h4("Lejand Konumlandırma"),
-      
-      
-      fluidRow(
-        column(6, sliderInput("hor_position", label = h5("Yatay Konum"), min = 0, 
-                              max = 1, value = 0.75)),
-        column(6, sliderInput("ver_position", label = h5("Dikey Konum"), min = 0, 
-                              max = 1, value = 0))
-      ),
-      
-      
-      actionButton("map_button", "Haritayı Oluştur"),
-      
-      tags$br(),
-      tags$br(),
-      
-      tags$h3(tags$b("İndirme")),
-      
-      
-      fluidRow(
-        
-        
-        column(4,numericInput("num_width", label = h5("Genişlik"), value = 14)),
-        column(4, numericInput("num_height", label = h5("Yükseklik"), value = 7))
-        
-      ),
-      
-      
-      downloadButton('downloadPlot', label = "İndir"),
-      
-      
-      tags$br(),
-      tags$br(),
-      
-      tags$h6("Geliştirici Hk."),
-      tags$h6(tags$a(href = "https://github.com/Leventcan", "Leventcan Gültekin"))
-      
-      
-    ),
-    
-    
-    mainPanel(
-      
-      plotOutput("map01")
-      
-    )
-    
-  )
+                
+                # App title ----
+                titlePanel("Tematik Harita Oluşturucu"),
+                
+                # Sidebar layout with input and output definitions ----
+                sidebarLayout(
+                  
+                  # Sidebar panel for inputs ----
+                  sidebarPanel(
+                    
+                    # Input: Select a file ----
+                    fileInput("file1", "Excel Dosyası Yükleyin",
+                              multiple = TRUE,
+                              accept = c("text/csv",
+                                         "text/comma-separated-values,text/plain",
+                                         ".csv",
+                                         ".xls",
+                                         ".xlsx")),
+                    
+                    tags$h5("Yükleyeceğiniz excel dosyalarında ", 
+                            tags$a(href = "https://github.com/Leventcan/tr_mapping_app/raw/master/sample_excel_tr2.xlsx", "Düzey-2"),
+                            " ve ",
+                            tags$a(href = "https://github.com/Leventcan/tr_mapping_app/raw/master/sample_excel_tr3.xlsx", "Düzey-3"),
+                            " verileri için linkte belirtilen excel dosyalarının kullanılmasında fayda bulunmaktadır."),
+                    
+                    tags$h5("Kullanım için ", 
+                            tags$a(href = "https://github.com/Leventcan/tr_mapping_app/blob/master/README.md","rehberi"),
+                            "inceleyebilirsiniz"),
+                    
+                    selectInput("olcek", label = h4("Ölçek Seçiniz"), 
+                                choices = list("Düzey-2", "Düzey-3"), 
+                                selected = "Düzey-3"),
+                    
+                    selectInput("veri_tip", label = h4("Verinizin Tipini Seçiniz"),
+                                choices = list("Ardışık" = "seq", "Kategorik" = "qual",
+                                               "Ayrıksı" = "div"),
+                                selected = "seq"),
+                    
+                    uiOutput("map_palette"),
+                    
+                    selectInput("colour_order", label = h4("Renk Sırası"), 
+                                choices = list("Düz" = 1 , "Ters" = 2), 
+                                selected = "Düz"),
+                    
+                    numericInput("legend_col", label = h4("Lejand Kolon Sayısı"), value = 1),
+                    
+                    checkboxInput("etiket", label = "Etiket Olsun", value = FALSE),
+                    
+                    fluidRow(
+                      column(6, numericInput("label_size", label = h5("Etiket Boyut"), value = 2.3)),
+                      column(6, numericInput("legend_size", label = h5("Lejand Boyut"), value = 8))
+                    ),
+                    
+                    uiOutput("factor_order"),
+                    
+                    # orderInput(inputId = 'foo', label = 'A simple example', items = c('A', 'B', 'C')),
+                    
+                    tags$h4("Lejand Konumlandırma"),
+                    
+                    
+                    fluidRow(
+                      column(6, sliderInput("hor_position", label = h5("Yatay Konum"), min = 0, 
+                                            max = 1, value = 0.75)),
+                      column(6, sliderInput("ver_position", label = h5("Dikey Konum"), min = 0, 
+                                            max = 1, value = 0))
+                    ),
+                    
+                    
+                    actionButton("map_button", "Haritayı Oluştur"),
+                    
+                    tags$br(),
+                    tags$br(),
+                    
+                    tags$h3(tags$b("İndirme")),
+                    
+                    
+                    fluidRow(
+                      
+                      
+                      column(4,numericInput("num_width", label = h5("Genişlik"), value = 14)),
+                      column(4, numericInput("num_height", label = h5("Yükseklik"), value = 7))
+                      
+                    ),
+                    
+                    
+                    downloadButton('downloadPlot', label = "İndir"),
+                    
+                    
+                    tags$br(),
+                    tags$br(),
+                    
+                    tags$h6("Geliştirici Hk."),
+                    tags$h6(tags$a(href = "https://github.com/Leventcan", "Leventcan Gültekin"))
+                    
+                    
+                  ),
+                  
+                  
+                  mainPanel(
+                    
+                    plotOutput("map01")
+                    
+                  )
+                  
+                )
 )
 
 # Define server logic to read selected file ----
@@ -182,10 +182,10 @@ server <- function(input, output) {
   
   
   output$factor_order <- renderUI({
-
+    
     orderInput(inputId = "foo", label = h4("Öğeleri Sıralayınız"), 
                items = unique(df_data()$DATA))
-
+    
   })
   
   
