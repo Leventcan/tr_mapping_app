@@ -12,9 +12,9 @@ Uygulama [https://thematic-maps.shinyapps.io/tr_mapping_app/](https://thematic-m
 
 - Excel dosyasını bilgisayarınıza indirdikten sona `DATA` isimli sütuna kullanmak istediğiniz veriyi yapıştırınız. Uygulamaya mevcut durumda yalnızca bir adet değişken yüklenebilmektedir. Bu sebeple excel şablonunda yer alan kolonlara ek olarak herhangi bir kolon veya sekme açılmaması gerekmektedir. Bu yüzden yapmak isteiğiniz het bir harita için ayrı ayrı yükleme yapmanız gerekmektedir.
 
-- Verilerinizi excek dosyasına kopyaladıktan sonra.
+- Verilerinizi excek dosyasına kopyaladıktan sonra, "Browse" tuşuna basıp excel dosyanızı seçip verilerinizi içe aktarabilirsiniz.
 
-<img src="screenshots/browse.png" alt="drawing" width="300"/>
+<img src="screenshots/browse.png" alt="drawing" width="350"/>
 
 - Uygulama mevcut durum itibariyle verileri kategorik olarak görselleştirmektedir. Örneğin; kullanacağınız veri sayısal bir değer ise  verileri `DATA` alanına kopyalamadan önce verileri kesikli hale getirmeniz gerekmektedir. (0-1000, 1001-2000, 2001-5000 gibi). Çalışacağınız veri kategorik bir veri ise doğrudan `DATA` alanına yükleyebilirsiniz uygulama sorunsuz çalışacaktır.
 
