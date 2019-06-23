@@ -2,7 +2,7 @@
 
 Bu uygulama ile Türkiye için Düzey-2 ve Düzey-3 ölçeğindeki tematik (choropleth) haritaları kolayca oluşturabilirsiniz. Uygulama Shiny üstçatısı kullanılarak tasarlanmıştır.
 
-![main](screenshots/main.png)
+![main](screenshots/main.PNG)
 
 Uygulama [https://thematic-maps.shinyapps.io/tr_mapping_app/](https://thematic-maps.shinyapps.io/tr_mapping_app/) adresinden ulaşabilirsiniz.
 
@@ -14,8 +14,7 @@ Uygulama [https://thematic-maps.shinyapps.io/tr_mapping_app/](https://thematic-m
 
 - Verilerinizi excek dosyasına kopyaladıktan sonra.
 
-
-<img src="screenshots/browse.png" alt="drawing" width="200"/>
+<img src="screenshots/browse.png" alt="drawing" width="300"/>
 
 - Uygulama mevcut durum itibariyle verileri kategorik olarak görselleştirmektedir. Örneğin; kullanacağınız veri sayısal bir değer ise  verileri `DATA` alanına kopyalamadan önce verileri kesikli hale getirmeniz gerekmektedir. (0-1000, 1001-2000, 2001-5000 gibi). Çalışacağınız veri kategorik bir veri ise doğrudan `DATA` alanına yükleyebilirsiniz uygulama sorunsuz çalışacaktır.
 
