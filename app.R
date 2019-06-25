@@ -60,7 +60,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                             " verileri için linkte belirtilen excel dosyalarının kullanılmasında fayda bulunmaktadır."),
                     
                     tags$h5("Kullanım için ", 
-                            tags$a(href = "https://github.com/Leventcan/tr_mapping_app/blob/master/README.md","rehberi"),
+                            tags$a(href = "https://leventcan.github.io/tr_mapping_app/","rehberi"),
                             "inceleyebilirsiniz"),
                     
                     selectInput("olcek", label = h4("Ölçek Seçiniz"), 
